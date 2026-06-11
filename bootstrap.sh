@@ -4,14 +4,17 @@
 # Usage:
 #   sh -c "$(curl -fsSL https://raw.githubusercontent.com/kevin-kuan-77/linux-dotfile/main/bootstrap.sh)"
 # or, after cloning the script down:
-#   DOTFILES_REMOTE=git@github.com:kevin-kuan-77/linux-dotfile.git ./bootstrap.sh
+#   DOTFILES_REMOTE=https://github.com/kevin-kuan-77/linux-dotfile.git ./bootstrap.sh
+#
+# The default remote is HTTPS so a *public* repo clones with no credentials.
+# If you need to PUSH later from a trusted machine, see the note at the bottom.
 
 set -eu
 
 # Where the bare repository lives. Override with DOTFILES_DIR if you like.
 DOTFILES_DIR="${DOTFILES_DIR:-$HOME/.cfg}"
-# Your config remote. Edit this default or pass DOTFILES_REMOTE=... in the env.
-DOTFILES_REMOTE="${DOTFILES_REMOTE:-git@github.com:kevin-kuan-77/linux-dotfile/config.git}"
+# Your config remote. HTTPS = anonymous read on a public repo.
+DOTFILES_REMOTE="${DOTFILES_REMOTE:-https://github.com/kevin-kuan-77/linux-dotfile.git}"
 BACKUP_DIR="$HOME/.cfg-backup"
 
 # A throwaway function so we don't depend on the shell alias existing yet.
@@ -27,7 +30,7 @@ if ! config checkout 2>/dev/null; then
     echo ">> Existing files would be overwritten. Backing them up to $BACKUP_DIR"
     mkdir -p "$BACKUP_DIR"
     config checkout 2>&1 \
-        | grep -E "^\s+\." \
+        | grep -E "^[[:space:]]+\." \
         | awk '{print $1}' \
         | while read -r f; do
             mkdir -p "$BACKUP_DIR/$(dirname "$f")"
