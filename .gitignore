@@ -1,0 +1,48 @@
+# .gitignore for a bare config repo (work-tree = $HOME)
+#
+# With `status.showUntrackedFiles no`, git already hides everything you haven't
+# explicitly added — so this file is NOT about reducing status noise. Its job is
+# to be a SAFETY NET: even if you fat-finger `config add ~/.ssh` or `add -A`,
+# these patterns block secrets and junk from being committed. (You can still
+# force one in with `config add -f` if you ever really mean to.)
+
+# --- Secrets & credentials -------------------------------------------------
+.ssh/
+.gnupg/
+.aws/credentials
+.config/gh/hosts.yml
+.netrc
+*.pem
+*.key
+*_rsa
+*_ed25519
+*.p12
+*.pfx
+.env
+.env.*
+*.secret
+.config/**/secrets*
+.docker/config.json
+
+# Machine-local shell overrides — keep these UNtracked on purpose so each
+# machine has its own (see README "One repo, many machines").
+.bashrc.local
+.zshrc.local
+.config/shell/local.sh
+
+# --- History & caches ------------------------------------------------------
+.bash_history
+.zsh_history
+.python_history
+.lesshst
+.wget-hsts
+.cache/
+.local/state/
+*.swp
+*~
+
+# --- OS / editor cruft -----------------------------------------------------
+.DS_Store
+Thumbs.db
+.Trash/
+.viminfo
