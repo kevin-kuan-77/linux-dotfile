@@ -2,16 +2,16 @@
 # Bootstrap your config on a fresh machine.
 #
 # Usage:
-#   sh -c "$(curl -fsSL https://raw.githubusercontent.com/<you>/<repo>/main/bootstrap.sh)"
+#   sh -c "$(curl -fsSL https://raw.githubusercontent.com/kevin-kuan-77/linux-dotfile/main/bootstrap.sh)"
 # or, after cloning the script down:
-#   DOTFILES_REMOTE=git@github.com:<you>/<repo>.git ./bootstrap.sh
+#   DOTFILES_REMOTE=git@github.com:kevin-kuan-77/linux-dotfile.git ./bootstrap.sh
 
 set -eu
 
 # Where the bare repository lives. Override with DOTFILES_DIR if you like.
 DOTFILES_DIR="${DOTFILES_DIR:-$HOME/.cfg}"
 # Your config remote. Edit this default or pass DOTFILES_REMOTE=... in the env.
-DOTFILES_REMOTE="${DOTFILES_REMOTE:-git@github.com:CHANGE_ME/config.git}"
+DOTFILES_REMOTE="${DOTFILES_REMOTE:-git@github.com:kevin-kuan-77/linux-dotfile/config.git}"
 BACKUP_DIR="$HOME/.cfg-backup"
 
 # A throwaway function so we don't depend on the shell alias existing yet.
